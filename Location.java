@@ -10,6 +10,7 @@ public class Location {
         this.name = name;
         this.description = description;
         this.item = null;
+        this.itemTaken = false;
     }
     public Location(String name, String description, String item) {
         this.name = name;
