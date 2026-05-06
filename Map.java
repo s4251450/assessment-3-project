@@ -13,6 +13,7 @@ public class Map
 
 
 
+
         boolean gameRunning = true;
         while(gameRunning)
         {
@@ -30,6 +31,13 @@ public class Map
             }
         }
 
+    }
+    public void setMap()
+    {
+        //Ok so Jiaming looking at this first one replace the brackets with the location name, description,
+        //and item name if there is an item on grid. Eacn grid unit has a location. Increase by [0,0] then
+        //[1,0] then [1,1] then [2,1] and so on till [3,3]. Some locations have items some dont.When ur finished commit it
+        map[0][0] = new Location("Name(replace this and other ones)", "Description", "item");
     }
     public static void showMenu()
     {
