@@ -7,7 +7,7 @@ public class Map
     static Scanner input = new Scanner(System.in);
     static int row = 0;
     static int column = 0;
-    Location[][]map = new Location [4][4] ;
+    static Location[][]map = new Location [4][4] ;
 
     public static void main (String[] args) {
 
@@ -15,8 +15,19 @@ public class Map
 
 
         boolean gameRunning = true;
+        setMap();
         while(gameRunning)
         {
+
+
+
+            System.out.println("========================");
+            System.out.println("Location: " + map[row][column].getName());
+            System.out.println("Description: " + map[row][column].getDescription());
+            if (map[row][column].getItem() != null && !map[row][column].getItemTaken())
+            {
+                System.out.println("Item available: " + map[row][column].getItem());
+            }
             System.out.printf("You are at the coordinates [%d, %d]\n", row, column);
             showMenu();
             int choice = input.nextInt();
@@ -32,12 +43,14 @@ public class Map
         }
 
     }
-    public void setMap()
+    public static void setMap()
     {
         //Ok so Jiaming looking at this first one replace the brackets with the location name, description,
         //and item name if there is an item on grid. Eacn grid unit has a location. Increase by [0,0] then
         //[1,0] then [1,1] then [2,1] and so on till [3,3]. Some locations have items some dont.When ur finished commit it
-        map[0][0] = new Location("Name(replace this and other ones)", "Description", "item");
+        //feel free to change the names and descriptions and items.
+        map[0][0] = new Location("Mars", "The red earth of mars surrounds you", "key");
+        map[1][0] = new Location("Jupiter", "The large atmosphere chokes you ");
     }
     public static void showMenu()
     {
