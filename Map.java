@@ -2,21 +2,34 @@ package Project;
 
 import java.util.Scanner;
 
-public class Map
+public class Game
 {
     static Scanner input = new Scanner(System.in);
-    static int row = 0;
-    static int column = 0;
-    Location[][]map = new Location [4][4] ;
+
+    static Location[][]map = new Location [4][4] ;
+    static Character player;
 
     public static void main (String[] args) {
 
 
 
+
         boolean gameRunning = true;
+        createPlayer();
+        setMap();
         while(gameRunning)
         {
-            System.out.printf("You are at the coordinates [%d, %d]\n", row, column);
+
+
+
+            System.out.println("========================");
+            System.out.println("Location: " + map[player.getRow()][player.getColumn()].getName());
+            System.out.println("Description: " + map[player.getRow()][player.getColumn()].getDescription());
+            if (map[player.getRow()][player.getColumn()].getItem() != null && !map[player.getRow()][player.getColumn()].getItemTaken())
+            {
+                System.out.println("Item available: " + map[player.getRow()][player.getColumn()].getItem());
+            }
+            System.out.printf("You are at the coordinates [%d, %d]\n", player.getRow(), player.getColumn());
             showMenu();
             int choice = input.nextInt();
             input.nextLine();
@@ -26,28 +39,79 @@ public class Map
             }
             else if (choice == 2)
             {
+                player.showInventory();
+            }
+            else if (choice == 3) {
+                map[player.getRow()][player.getColumn()].takeItem();
+
+                player.addItem(map[player.getRow()][player.getColumn()].getItem());
+                System.out.println("You took: " + map[player.getRow()][player.getColumn()].getItem());
+            }
+            else if (choice == 4)
+            {
                 gameRunning = false;
             }
         }
 
     }
+    public static void setMap()
+    {
+        //just change the strings to actual locations descriptions and items
+        map[0][0] = new Location("location 1", "description 1", "item 1");
+        map[1][0] = new Location("location 2", "description 2");
+        map[0][1] = new Location("location 3", "description 3", "item 2");
+        map[1][1] = new Location("location 4", "description 4");
+        map[2][0] = new Location("location 5", "description 5", "item 3");
+        map[2][1] = new Location("location 6", "description 6");
+        map[2][2] = new Location("location 7", "description 7", "item 4");
+        map[0][2] = new Location("location 8", "description 8");
+        map[1][2] = new Location("location 9", "description 9", "item 5");
+        map[3][0] = new Location("location 10", "description 10");
+        map[3][1] = new Location("location 11", "description 11", "item 6");
+        map[3][2] = new Location("location 12", "description 12");
+        map[3][3] = new Location("location 13", "description 13", "item 7");
+        map[0][3] = new Location("location 14", "description 14");
+        map[1][3] = new Location("location 15", "description 15", "item 8");
+        map[2][3] = new Location("location 16", "description 16");
+
+        
+    }
+    public static void createPlayer()
+    {
+        System.out.println("\n===== Character Creation =====");
+        System.out.print("Name: ");
+        String name = input.nextLine();
+        player = new Character(name);
+        System.out.println("\nWelcome " + player.getName());
+    }
     public static void showMenu()
     {
         System.out.println("Menu");
         System.out.println("1. Move");
-        System.out.println("2. Quit");
+        System.out.println("2. Show inventoru");
+
+        String item = map[player.getRow()][player.getColumn()].takeItem();
+        if (item != null)
+        {
+            System.out.println("3. Take Item");
+        }
+        System.out.println("4. Quit");
+
+
+
+
     }
     public static void move()
-            //dsadsadas
     {
         System.out.println("What direction would you like to move in terms of compass directions(n/e/s/w)");
         String direction = input.nextLine();
         if (direction.equals("n"))
         {
-            if (row > 0)
+            if (player.getRow()> 0)
             {
-                row -=1;
-                System.out.printf("Coordinates: [%d, %d]\n", row, column);
+
+                player.moveNorth();
+                System.out.printf("Coordinates: [%d, %d]\n", player.getRow(), player.getColumn());
 
             }
             else
@@ -59,10 +123,10 @@ public class Map
         }
         else if (direction.equals("e") )
         {
-            if (column < 3)
+            if (player.getColumn() < 3)
             {
-                column += 1;
-                System.out.printf("Coordinates: [%d, %d]\n", row, column);
+                player.moveEast();
+                System.out.printf("Coordinates: [%d, %d]\n", player.getRow(), player.getColumn());
             }
             else
             {
@@ -71,10 +135,10 @@ public class Map
         }
         else if (direction.equals("s"))
         {
-            if (row < 3)
+            if (player.getRow() < 3)
             {
-                row += 1;
-                System.out.printf("Coordinates: [%d, %d]\n", row, column);
+                player.moveSouth();
+                System.out.printf("Coordinates: [%d, %d]\n", player.getRow(), player.getColumn());
             }
             else
             {
@@ -83,10 +147,10 @@ public class Map
         }
         else if (direction.equals("w"))
         {
-            if (column > 0)
+            if (player.getColumn() > 0)
             {
-                column -= 1;
-                System.out.printf("Coordinates: [%d, %d]\n", row, column);
+                player.moveWest();
+                System.out.printf("Coordinates: [%d, %d]\n", player.getRow(), player.getColumn());
             }
             else
             {
@@ -99,3 +163,9 @@ public class Map
         }
 
     }
+
+
+
+
+}
+
