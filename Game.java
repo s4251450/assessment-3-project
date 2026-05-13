@@ -29,6 +29,9 @@ public class Game
             {
                 System.out.println("Item available: " + map[player.getRow()][player.getColumn()].getItem());
             }
+            if (map[player.getRow()][player.getColumn()].getEnemy() != null) {
+                System.out.println("Enemy available: " + map[player.getRow()][player.getColumn()].getEnemy());
+            }
             System.out.printf("You are at the coordinates [%d, %d]\n", player.getRow(), player.getColumn());
             showMenu();
             int choice = input.nextInt();
@@ -42,13 +45,26 @@ public class Game
                 player.showInventory();
             }
             else if (choice == 3) {
-                map[player.getRow()][player.getColumn()].takeItem();
+                if (map[player.getRow()][player.getColumn()].getItem() != null && map[player.getRow()][player.getColumn()].getItemTaken() == false) {
+                    map[player.getRow()][player.getColumn()].takeItem();
 
-                player.addItem(map[player.getRow()][player.getColumn()].getItem());
-                System.out.println("You took: " + map[player.getRow()][player.getColumn()].getItem());
+
+
+
+                    player.addItem(map[player.getRow()][player.getColumn()].getItem());
+                    System.out.println("You took: " + map[player.getRow()][player.getColumn()].getItem());
+                }
+                else if (map[player.getRow()][player.getColumn()].getEnemy() != null && map[player.getRow()][player.getColumn()].getItem() == null)
+                {
+                    System.out.println("Combat initiated");
+
+                }
             }
             else if (choice == 4)
             {
+
+            }
+            else if (choice == 5) {
                 gameRunning = false;
             }
         }
@@ -58,7 +74,7 @@ public class Game
     {
         //just change the strings to actual locations descriptions and items
         map[0][0] = new Location("location 1", "description 1", "item 1");
-        map[1][0] = new Location("location 2", "description 2");
+        map[1][0] = new Location("location 2", "description 2", null, new Enemy("Enemy 1", 30));
         map[0][1] = new Location("location 3", "description 3", "item 2");
         map[1][1] = new Location("location 4", "description 4");
         map[2][0] = new Location("location 5", "description 5", "item 3");
@@ -88,12 +104,17 @@ public class Game
     {
         System.out.println("Menu");
         System.out.println("1. Move");
-        System.out.println("2. Show inventoru");
+        System.out.println("2. Show inventory");
 
-        String item = map[player.getRow()][player.getColumn()].takeItem();
-        if (item != null)
+        String item = map[player.getRow()][player.getColumn()].getItem();
+        Enemy enemy = map[player.getRow()][player.getColumn()].getEnemy();
+        if (item != null && !map[player.getRow()][player.getColumn()].getItemTaken())
         {
             System.out.println("3. Take Item");
+        }
+
+        else if (enemy != null && enemy.isAlive()) {
+            System.out.println("3. Battle enemy");
         }
         System.out.println("4. Quit");
 

@@ -8,6 +8,7 @@ public class Character {
     private int column;
     private int health;
     private int maxHealth;
+    private int damage;
     private ArrayList<String> inventory;
     public Character(String name)
     {
@@ -16,6 +17,7 @@ public class Character {
         this.column = 0;
         this.maxHealth = 100;
         this.health = maxHealth;
+        this.damage = 10;
         inventory = new ArrayList<>();
     }
     public String getName() {
@@ -32,6 +34,19 @@ public class Character {
     }
     public int getMaxHealth() {
         return maxHealth;
+    }
+    public boolean isAlive() {
+        return health > 0;
+    }
+    public void increaseDamage(int amount) {
+        this.damage += amount;
+    }
+    public void levelUp(Enemy enemy)
+    {
+        if (!enemy.isAlive()) {
+            increaseDamage(5);
+            System.out.println("You have successfully leveled up.\nYour damage has increased by 5");
+        }
     }
     public void setPosition(int row, int column){
         this.row = row;
@@ -66,5 +81,12 @@ public class Character {
             }
         }
     }
+    public void takeDamage(int damage)
+    {
+        health -= damage;
+        if (health < 0) {
+            health = 0;
+        }
+     }
 }
 
