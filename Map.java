@@ -38,6 +38,7 @@ public class Map
         System.out.println("2. Quit");
     }
     public static void move()
+            //dsadsadas
     {
         System.out.println("What direction would you like to move in terms of compass directions(n/e/s/w)");
         String direction = input.nextLine();
@@ -98,9 +99,3 @@ public class Map
         }
 
     }
-
-
-
-
-}
-
