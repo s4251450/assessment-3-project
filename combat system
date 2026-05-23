@@ -1,0 +1,58 @@
+package game;
+
+public class Combatsystem {
+
+    // Attack method
+    public static void attack(String input, Enemy enemy) {
+
+        int damage = 0;
+
+        // Normal attack
+        if (input.equals("a")) {
+
+            damage = 10;
+            System.out.println("Normal Attack!");
+        }
+
+        // Strong attack
+        else if (input.equals("b")) {
+
+            damage = 20;
+            System.out.println("Strong Attack!");
+        }
+
+        // Stronger attack
+        else if (input.equals("c")) {
+
+            damage = 50;
+            System.out.println("Stronger Attack!");
+        }
+
+        // Secret skill
+        else if (input.equals("d")) {
+
+            damage = enemy.hp;
+            System.out.println("Mysterious Skill...");
+        }
+
+        // Wrong input
+        else {
+
+            System.out.println("Invalid Input");
+            return;
+        }
+
+        // Reduce enemy HP
+        enemy.hp -= damage;
+
+        // HP cannot go below 0
+        if (enemy.hp < 0) {
+
+            enemy.hp = 0;
+        }
+
+        // Show result
+        System.out.println("Damage: " + damage);
+        System.out.println("Enemy HP: " + enemy.hp);
+    }
+}
