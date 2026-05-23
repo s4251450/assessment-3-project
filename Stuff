@@ -1,0 +1,19 @@
+    public static void setMap()
+    {
+        //just change the strings to actual locations descriptions and items
+        map[0][0] = new Location("Forest", "A peaceful forest, with trees a lot of trees", "Wood Sword(give you extra 10 dmg wow!)");
+        map[1][0] = new Location("Dark forest", "Just go inside the forest, but a lot darker and the trees are taller", null, new Enemy("Bandit", 30));
+        map[0][1] = new Location("Cave", "A strange cave?", "HP potion");
+        map[1][1] = new Location("Deeper Cave", "You go inside the cave but you are not along", null, newEnemy("Gobline", 40));
+        map[2][0] = new Location("Lake", "A peaceful lake good for swimming", "Unknown(Unknown)");
+        map[2][1] = new Location("Forest?", "It looks really fimiller, you think that you went here whiles ago");
+        map[2][2] = new Location("Mountain", "You reached a red mountain, the rocks feel like wet soil", "A red stone axe (Deal 40 dmg)");
+        map[0][2] = new Location("Red lake", "A red lake with a lot of fishes swimming inside");
+        map[1][2] = new Location("Red Forest", "It looks like a forest, but red and soft", null, newEnemy("Bandit?", 50));
+        map[3][0] = new Location("Village", "A peacefull village but the villager hides from you");
+        map[3][1] = new Location("Town", "You enter the townhall but there was no one inside", "Red soil(eat to regain hp)");
+        map[3][2] = new Location("Camp", "A safe camp with warm camp fire, you can take a rest!", "Regain 60% hp");
+        map[3][3] = new Location("Traveller camp", "You meet a bunch of strange travellers, they give their fleash to you", "???");
+        map[0][3] = new Location("Vally", "A nice Vally, looks quiet", null, newEnemy("Knight", 500));
+        map[1][3] = new Location("LightHouse", "You can get a boat out of this island", "Ship key(required for escape ending)");
+        map[2][3] = new Location("You reach your goal", "???");
