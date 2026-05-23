@@ -2,7 +2,7 @@ package game;
 
 public class Combatsystem {
 
-    // Attack method
+    // Attack
     public static void attack(String input, Enemy enemy) {
 
         int damage = 0;
@@ -21,21 +21,21 @@ public class Combatsystem {
             System.out.println("Strong Attack!");
         }
 
-        // Stronger attack
+        // 战斗！
         else if (input.equals("c")) {
 
             damage = 50;
             System.out.println("Stronger Attack!");
         }
 
-        // Secret skill
+        // ↑↑↓↓←→←→BABA
         else if (input.equals("d")) {
 
             damage = enemy.hp;
-            System.out.println("Mysterious Skill...");
+            System.out.println("↑↑↓↓←→←→BABA！最终の兵器...");
         }
 
-        // Wrong input
+        // not working imput
         else {
 
             System.out.println("Invalid Input");
